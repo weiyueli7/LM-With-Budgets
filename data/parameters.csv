@@ -1,0 +1,9 @@
+Model Name,nparams,nlayers,dmodel,nheads,dhead,Batch Size,Learning Rate
+GPT-3 Small,125M,12,768,12,64,0.5M,6.0e-4
+GPT-3 Medium,350M,24,1024,16,64,0.5M,3.0e-4
+GPT-3 Large,760M,24,1536,16,96,0.5M,2.5e-4
+GPT-3 XL,1.3B,24,2048,24,128,1M,2.0e-4
+GPT-3 2.7B,2.7B,32,2560,32,80,1M,1.6e-4
+GPT-3 6.7B,6.7B,32,4096,32,128,2M,1.2e-4
+GPT-3 13B,13.0B,40,5140,40,128,2M,1.0e-4
+GPT-3 175B or “GPT-3”,175.0B,96,12288,96,128,3.2M,0.6e-4
