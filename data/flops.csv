@@ -1,13 +1,4 @@
 Model,Total train compute (PF-days),Total train compute (flops),Params (M),Training tokens (billions),Flops per param per token,Mult for bwd pass,Fwd-pass flops per active param per token,Frac of params active for each token
-T5-Small,2.08E+00,1.80E+20,60,1000,3,3,1,0.5
-T5-Base,7.64E+00,6.60E+20,220,1000,3,3,1,0.5
-T5-Large,2.67E+01,2.31E+21,770,1000,3,3,1,0.5
-T5-3B,1.04E+02,9.00E+21,3000,1000,3,3,1,0.5
-T5-11B,3.82E+02,3.30E+22,11000,1000,3,3,1,0.5
-BERT-Base,1.89E+00,1.64E+20,109,250,6,3,2,1.0
-BERT-Large,6.16E+00,5.33E+20,355,250,6,3,2,1.0
-RoBERTa-Base,1.74E+01,1.50E+21,125,2000,6,3,2,1.0
-RoBERTa-Large,4.93E+01,4.26E+21,355,2000,6,3,2,1.0
 GPT-3 Small,2.60E+00,2.25E+20,125,300,6,3,2,1.0
 GPT-3 Medium,7.42E+00,6.41E+20,356,300,6,3,2,1.0
 GPT-3 Large,1.58E+01,1.37E+21,760,300,6,3,2,1.0

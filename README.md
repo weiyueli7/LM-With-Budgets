@@ -20,7 +20,6 @@ The `data/parameters.csv` contains the structures for different GPT-3 models.
 We provide the code to calculate total trainable parameters for training and total FLOPs for forward and backward passes of the GPT-3 decoder-only model. To run the code for estimating parameters and FLOPs for all GPT-3 models included in `data/parameters.csv`:
 ```bash
 python3 main.py -o [parameter/forward_flop/backward_flop/all]
-
 # Sample command for calculating total trainable parameters
 python3 main.py -o parameter
 ```
