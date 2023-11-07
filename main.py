@@ -19,29 +19,29 @@ def main(option):
     n_heads = df['nheads']
     d_head = df['dhead']
     if option in ["parameter", "all"]:
-    print("Estimating total trainable parameters")
+        print("Estimating total trainable parameters")
         for i in range(int(df.shape[0])):
             print('-------------------------')
             print(f"Estimating parameters for model {df['Model Name'][i]}...")
             print(f'Answer: {answer[i]}; Estimate: {estimate_parameters(s_vocab[i], n_ctx[i], n_layers[i], d_model[i], n_heads[i], d_head[i])}M')
             print('-------------------------')
-    print('='*80)
+        print('='*80)
     elif option in ["forward_flop", "all"]:
-    print("Estimating total forward FLOPs")
+        print("Estimating total forward FLOPs")
         for i in range(int(df.shape[0])):
             print('-------------------------')
             print(f"Estimating FLOPs for model {df['Model Name'][i]}...")
             print(f'Answer: {answer[i]}; Estimate: {estimate_forward_flops(s_vocab[i], n_ctx[i], n_layers[i], d_model[i], n_heads[i], d_head[i])}M')
             print('-------------------------')
-    print('='*80)
+        print('='*80)
     elif option in ["backward_flop", "all"]:
-    print("Estimating total backward FLOPs")
+        print("Estimating total backward FLOPs")
         for i in range(int(df.shape[0])):
             print('-------------------------')
             print(f"Estimating FLOPs for model {df['Model Name'][i]}...")
             print(f'Answer: {answer[i]}; Estimate: {estimate_backward_flops(s_vocab[i], n_ctx[i], n_layers[i], d_model[i], n_heads[i], d_head[i])}M')
             print('-------------------------')
-    print('='*80)
+        print('='*80)
 
 
 if __name__ == '__main__':
