@@ -62,7 +62,7 @@ def main(option):
         for i in range(int(df.shape[0])):
             print('-------------------------')
             print(f"Estimating Backward FLOPs for model {df['Model Name'][i]}...")
-            print(f'Answer: {answer[i]}; Estimate: {estimate_backward_flops(s_vocab[i], n_ctx[i], n_layers[i], d_model[i], n_heads[i], d_head[i])}M')
+            print(f'Answer: {answer[i]/2}; Estimate: {estimate_backward_flops(s_vocab[i], n_ctx[i], n_layers[i], d_model[i], n_heads[i], d_head[i])}')
             print('-------------------------')
         print('='*60)
 
