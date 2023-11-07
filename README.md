@@ -14,7 +14,7 @@ pip install -r requirements.txt
 ```
 
 ## Dataset
-The `data/parameters.csv` contains the structures for different GPT-3 models.
+The [`data`](data) directory contains the structures (parameters and flops) for different GPT-3 models.
 
 ## Running the code
 We provide the code to calculate total trainable parameters for training and total FLOPs for forward and backward passes of the GPT-3 decoder-only model. To run the code for estimating parameters and FLOPs for all GPT-3 models included in `data/parameters.csv`:
