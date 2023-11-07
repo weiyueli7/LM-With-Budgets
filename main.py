@@ -26,7 +26,7 @@ def main(option):
             print(f'Answer: {answer[i]}; Estimate: {estimate_parameters(s_vocab[i], n_ctx[i], n_layers[i], d_model[i], n_heads[i], d_head[i])}M')
             print('-------------------------')
         print('='*80)
-    elif option in ["forward_flop", "all"]:
+    if option in ["forward_flop", "all"]:
         print("Estimating total forward FLOPs")
         for i in range(int(df.shape[0])):
             print('-------------------------')
@@ -34,7 +34,7 @@ def main(option):
             print(f'Answer: {answer[i]}; Estimate: {estimate_forward_flops(s_vocab[i], n_ctx[i], n_layers[i], d_model[i], n_heads[i], d_head[i])}M')
             print('-------------------------')
         print('='*80)
-    elif option in ["backward_flop", "all"]:
+    if option in ["backward_flop", "all"]:
         print("Estimating total backward FLOPs")
         for i in range(int(df.shape[0])):
             print('-------------------------')
