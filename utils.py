@@ -1,4 +1,4 @@
-def estimate_parameters(s_vocab, n_ctx, n_layers, d_model, n_heads, d_head):
+def estimate_parameters(s_vocab, n_ctx, n_layers, d_model, n_heads, d_head, hidden_ratio):
     """
     Calculate the number of parameters (in Millions) in the GPT-3 models.
     Args:
@@ -9,6 +9,7 @@ def estimate_parameters(s_vocab, n_ctx, n_layers, d_model, n_heads, d_head):
         d_model (int): Embedding size.
         n_heads (int): Number of heads.
         d_head (int): Size of each head.
+        hidden_ratio (float): Ratio of hidden size to embedding size.
     Returns:
         float: Number of parameters (in Millions).
 
@@ -17,8 +18,8 @@ def estimate_parameters(s_vocab, n_ctx, n_layers, d_model, n_heads, d_head):
     pos_embed = n_ctx * d_model
     qkv = (3 * d_model * d_head) * n_heads * n_layers
     proj = (n_heads * d_head * d_model) * n_layers
-    w1, b1 = (d_model * (4 * d_model)) * n_layers, 4 * d_model * n_layers
-    w2, b2 = ((4 * d_model) * d_model) * n_layers, d_model * n_layers
+    w1, b1 = (d_model * (hidden_ratio * d_model)) * n_layers, hidden_ratio * d_model * n_layers
+    w2, b2 = ((hidden_ratio * d_model) * d_model) * n_layers, d_model * n_layers
     l_norm = 2 * (2 * d_model) * n_layers
     
     total = word_embed+pos_embed+qkv+proj+w1+b1+w2+b2+l_norm
