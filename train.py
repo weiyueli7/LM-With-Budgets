@@ -7,8 +7,11 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 from transformers import AutoTokenizer, LlamaForCausalLM, LlamaModel, LlamaConfig
 from datasets import load_dataset
+import wandb
 
 from utils import *
+
+wandb.init(project="customized vicuna model training", entity="yil115")
 
 def tokenize_function(example, tokenizer):
     """
@@ -82,7 +85,9 @@ def main():
     device = torch.device(f"cuda:{args.gpu_id}" if torch.cuda.is_available() else "cpu")
     llama2_model.to(device)
     
-    
+    wb_config = wandb.config
+    wb_config.learning_rate = 0.001
+    wb_config.batch_size = args.batch_size
     
     printt("\n\n\n\nTraining/Validation in progress...\n----------------------------------\n\n\n\n", 'y')
 
@@ -99,8 +104,11 @@ def main():
             total_loss += loss.item()
             loss.backward()
             optimizer.step()
+            wandb.log({"epoch": epoch, "loss": loss})
         printt(f"Epoch {epoch} --- Average training loss: {total_loss / len(train_dataloader)}", 'b')
-
+        wandb.log({"Customize Vicuna One": wandb.save("customize1.pth")})
+        wandb.finish()
+        
         llama2_model.eval()
         total_eval_loss = 0
         with torch.no_grad():
