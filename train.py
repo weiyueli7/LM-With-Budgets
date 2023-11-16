@@ -11,7 +11,7 @@ import wandb
 
 from utils import *
 
-wandb.init(project="customized vicuna model training", entity="yil115")
+
 
 def tokenize_function(example, tokenizer):
     """
@@ -52,6 +52,8 @@ def main():
     parser.add_argument('--epochs', type=int, default=3, help='Number of epochs.')
     parser.add_argument('--gpu_id', type=int, default=0, help='GPU id.')
     args = parser.parse_args()
+    
+    wandb.init(project="customized vicuna model training", entity="yil115")
     
     printt("\n\n\n\nLoading model...\n----------------------------------\n\n\n\n", 'y')
 
@@ -104,10 +106,12 @@ def main():
             total_loss += loss.item()
             loss.backward()
             optimizer.step()
-            wandb.log({"epoch": epoch, "loss": loss})
+        
+        wandb.log({"epoch": epoch, "training loss": total_loss / len(train_dataloader)})
+        
         printt(f"Epoch {epoch} --- Average training loss: {total_loss / len(train_dataloader)}", 'b')
-        wandb.log({"Customize Vicuna One": wandb.save("customize1.pth")})
-        wandb.finish()
+        
+
         
         llama2_model.eval()
         total_eval_loss = 0
@@ -119,6 +123,8 @@ def main():
                 outputs = llama2_model(input_ids, attention_mask=attention_mask, labels=labels)
                 loss = outputs.loss
                 total_eval_loss += loss.item()
+                
+        wandb.log({"epoch": epoch, "validation_loss": total_eval_loss / len(valid_dataloader)})
         printt(f"Epoch {epoch} --- Validation loss: {total_eval_loss / len(valid_dataloader)}", 'b')
 
 
@@ -134,7 +140,13 @@ def main():
             outputs = llama2_model(input_ids, attention_mask=attention_mask, labels=labels)
             loss = outputs.loss
             total_test_loss += loss.item()
+            
+    wandb.log({"test_loss": total_test_loss / len(test_dataloader)})
     printt(f"Test loss: {total_test_loss / len(test_dataloader)}", 'b')
+    
+    
+    
+
     
     
     printt("\n\n\n\nSaving model...\n----------------------------------\n\n\n\n", 'r')
@@ -143,7 +155,9 @@ def main():
         os.makedirs(args.model_dir)
 
     torch.save(llama2_model.state_dict(), f"{args.model_dir}/{args.model_name}")
+    wandb.save(f"{args.model_dir}/{args.model_name}")
     printt(f"Model saved at {args.model_dir}/{args.model_name}", 'g')
+    wandb.finish()
 
 if __name__ == "__main__":
     main()

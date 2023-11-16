@@ -11,7 +11,7 @@
   "intermediate_size": 128,
   "max_position_embeddings": 1024,
   "model_type": "llama",
-  "num_attention_heads": 6,
+  "num_attention_heads": 4,
   "num_hidden_layers": 6,
   "pad_token_id": 0,
   "rms_norm_eps": 1e-06,
@@ -21,3 +21,4 @@
   "use_cache": true,
   "vocab_size": 32000
 }
+
