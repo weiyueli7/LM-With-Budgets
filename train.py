@@ -11,9 +11,26 @@ from datasets import load_dataset
 from utils import *
 
 def tokenize_function(example, tokenizer):
+    """
+    Tokenize the example
+    
+    Args:
+        example: A dict containing the sentence1 and sentence2
+        tokenizer: The tokenizer to use
+    Returns:
+        A dict containing the input_ids, attention_mask and labels
+    """
     return tokenizer(example["sentence1"], example["sentence2"], padding="max_length", truncation=True, return_tensors='pt')
 
 def collate_batch(batch):
+    """
+    Collate the batch
+    
+    Args:
+        batch: A list of dict containing the input_ids, attention_mask and labels
+    Returns:
+        A dict containing the input_ids, attention_mask and labels
+    """
     return {
         'input_ids': torch.tensor([item['input_ids'] for item in batch]),
         'attention_mask': torch.tensor([item['attention_mask'] for item in batch]),
@@ -21,6 +38,9 @@ def collate_batch(batch):
     }
 
 def main():
+    """
+    Main function to train the custom models
+    """
     parser = argparse.ArgumentParser(description='Train a Custom Llama model.')
     parser.add_argument('--config_path', type=str, default='configs/config.json', help='Path to config file.')
     parser.add_argument('--model_name', type=str, default='custom1.pth', help='Model name to save.')
