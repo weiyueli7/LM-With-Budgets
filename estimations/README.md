@@ -1,17 +1,8 @@
 # DSC180A Project 1
 We provided the functions for calculating parameters and FLOPs for GPT-3 decoder-only models for preparing Project 1.
 ## Table of Contents
-* [Setup](#setup)
 * [Dataset](#dataset)
 * [Running the code](#running-the-code)
-
-## Setup
-To initialize the environment and packages:
-```bash
-conda create -n <your_env_name>
-conda activate <your_env_name>
-pip install -r requirements.txt
-```
 
 ## Dataset
 The [`data`](data) directory contains the structures (parameters and flops) for different GPT-3 models.
