@@ -57,15 +57,14 @@ def main():
     
     printt("\n\n\n\nLoading model...\n----------------------------------\n\n\n\n", 'y')
 
-    with open(args.config_path) as f:
-        config = json.load(f)
+    with open(args.config_path, 'r') as file:
+        config_dict = json.load(file)
 
-    configuration = LlamaConfig(**config)
-    llama2_model = LlamaForCausalLM.from_pretrained("lmsys/vicuna-7b-v1.5")
-    llama2_model.config = configuration
-    llama2_model.model = LlamaModel(configuration)
-    llama2_model.vocab_size = configuration.vocab_size
-    llama2_model.lm_head = nn.Linear(configuration.hidden_size, configuration.vocab_size, bias=False)
+    # Create the configuration object
+    config = LlamaConfig.from_dict(config_dict)
+
+    # Initialize the LlamaForCausalLM model
+    llama2_model = LlamaForCausalLM(config)
     tokenizer = AutoTokenizer.from_pretrained("lmsys/vicuna-7b-v1.5")
     
     
