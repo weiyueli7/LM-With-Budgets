@@ -12,6 +12,8 @@ sentencepiece
 zstd
 jupyter
 ipywidgets
+zstandard
+fsspec
 # opendatasets
 # packaging
 # plotly
@@ -20,11 +22,9 @@ ipywidgets
 # pycocotools
 # python-magic
 # scikit-image
-# sentencepiece
 # spacy
 # streamlit
 # timm==0.4.12
 # webdataset
 # wheel
 # peft
-# jupyter

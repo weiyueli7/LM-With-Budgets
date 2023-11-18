@@ -97,7 +97,7 @@ def main():
         llama2_model.train()
         total_loss = 0
         for batch in tqdm(train_dataloader):
-            optimizer.zero_grad()
+            optimizer.zero_grad(e
             input_ids = batch['input_ids'].to(device)
             attention_mask = batch['attention_mask'].to(device)
             labels = batch['input_ids'].to(device)  # In causal LM, labels are usually the input_ids
