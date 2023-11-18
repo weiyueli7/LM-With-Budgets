@@ -75,7 +75,7 @@ def main():
     OPTIMAL_NUM_TOKENS = 64_000_000
     SEED = 4
 
-    raw_datasets = datasets.load_dataset("cerebras/SlimPajama-627B", streaming=True)
+    raw_datasets = load_dataset("cerebras/SlimPajama-627B", streaming=True)
     tokenizer = AutoTokenizer.from_pretrained("lmsys/vicuna-7b-v1.5")
     shuffled_datasets = raw_datasets.shuffle(seed=SEED)
 
