@@ -70,26 +70,8 @@ def main():
     
     printt("\n\n\n\nLoading dataset...\n----------------------------------\n\n\n\n", 'y')
 
-    MAX_LENGTH = 1024
-    OPTIMAL_NUM_TOKENS = 64_000_000
-    SEED = 4
-
-    raw_datasets = load_dataset("cerebras/SlimPajama-627B", streaming=True)
-    tokenizer = AutoTokenizer.from_pretrained("lmsys/vicuna-7b-v1.5")
-    shuffled_datasets = raw_datasets.shuffle(seed=SEED)
-
-    tokenized_datasets = {}
-    for key in raw_datasets.keys():
-        tokenized_datasets[key] = shuffled_datasets[key].map(
-            lambda x: tokenizer(
-                x["text"],
-                truncation=True,
-                padding="max_length",
-                max_length=MAX_LENGTH,
-                return_tensors="pt",
-            )
-        )
-        
+    raw_datasets = load_dataset("glue", "mrpc")
+    tokenized_datasets = raw_datasets.map(lambda x: tokenize_function(x, tokenizer), batched=True)
     train_dataset = tokenized_datasets["train"]
     valid_dataset = tokenized_datasets["validation"]
     test_dataset = tokenized_datasets["test"]
@@ -114,7 +96,7 @@ def main():
         llama2_model.train()
         total_loss = 0
         for batch in tqdm(train_dataloader):
-            optimizer.zero_grad(e
+            optimizer.zero_grad()
             input_ids = batch['input_ids'].to(device)
             attention_mask = batch['attention_mask'].to(device)
             labels = batch['input_ids'].to(device)  # In causal LM, labels are usually the input_ids
