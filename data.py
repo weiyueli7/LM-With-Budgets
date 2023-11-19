@@ -2,9 +2,9 @@ from datasets import load_dataset
 from transformers import AutoTokenizer
 
 
-def tokenize(MAX_LENGTH=1024, OPTIMAL_NUM_TOKENS=64_000_000, SEED=4, dataset_path="cerebras/SlimPajama-627B"):
+def tokenize(MAX_LENGTH=1024, OPTIMAL_NUM_TOKENS=64_000_000, SEED=4, dataset_path="cerebras/SlimPajama-627B", model_name="lmsys/vicuna-7b-v1.5"):
     raw_datasets = load_dataset(dataset_path, streaming=True)
-    tokenizer = AutoTokenizer.from_pretrained("lmsys/vicuna-7b-v1.5")
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
     shuffled_datasets = raw_datasets.shuffle(seed=SEED)
 
     tokenized_datasets = {}
