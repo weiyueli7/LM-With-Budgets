@@ -1,25 +1,30 @@
+ipykernel
 ipython
-opendatasets
-packaging
 pandas
 numpy
-plotly
-pre-commit
-pycocoevalcap
-pycocotools
-python-magic
-scikit-image
-sentencepiece
-spacy
-streamlit
-timm==0.4.12
-torch>=1.10.0, <2.0.0
+torch
 torchvision
 tqdm
-transformers>=4.28.0
-webdataset
-wheel
-peft
+transformers
 wandb
-jupyter
 datasets
+sentencepiece
+zstd
+jupyter
+ipywidgets
+zstandard
+fsspec
+# opendatasets
+# packaging
+# plotly
+# pre-commit
+# pycocoevalcap
+# pycocotools
+# python-magic
+# scikit-image
+# spacy
+# streamlit
+# timm==0.4.12
+# webdataset
+# wheel
+# peft
