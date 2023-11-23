@@ -1,0 +1,87 @@
+/home/shawn/anaconda3/envs/bliva/lib/python3.9/site-packages/transformers/optimization.py:411: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
+  warnings.warn(
+wandb: Currently logged in as: wel019. Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.16.0 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.8
+wandb: Run data is saved locally in /home/shawn/nvme/wli/Revisiting-Vicuna/wandb/run-20231123_021538-djzlva78
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run expert-valley-15
+wandb: ⭐️ View project at https://wandb.ai/wel019/huggingface
+wandb: 🚀 View run at https://wandb.ai/wel019/huggingface/runs/djzlva78
+  0%|          | 0/3 [00:00<?, ?it/s]You're using a LlamaTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+Traceback (most recent call last):
+  File "/home/shawn/anaconda3/envs/bliva/lib/python3.9/site-packages/transformers/tokenization_utils_base.py", line 731, in convert_to_tensors
+    tensor = as_tensor(value)
+TypeError: not a sequence
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/shawn/nvme/wli/Revisiting-Vicuna/trainer.py", line 93, in <module>
+  File "/home/shawn/nvme/wli/Revisiting-Vicuna/trainer.py", line 76, in train
+  File "/home/shawn/anaconda3/envs/bliva/lib/python3.9/site-packages/transformers/trainer.py", line 1539, in train
+    return inner_training_loop(
+  File "/home/shawn/anaconda3/envs/bliva/lib/python3.9/site-packages/transformers/trainer.py", line 1787, in _inner_training_loop
+    for step, inputs in enumerate(epoch_iterator):
+  File "/home/shawn/anaconda3/envs/bliva/lib/python3.9/site-packages/accelerate/data_loader.py", line 384, in __iter__
+    current_batch = next(dataloader_iter)
+  File "/home/shawn/anaconda3/envs/bliva/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 628, in __next__
+    data = self._next_data()
+  File "/home/shawn/anaconda3/envs/bliva/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 671, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "/home/shawn/anaconda3/envs/bliva/lib/python3.9/site-packages/torch/utils/data/_utils/fetch.py", line 61, in fetch
+    return self.collate_fn(data)
+  File "/home/shawn/anaconda3/envs/bliva/lib/python3.9/site-packages/transformers/trainer_utils.py", line 704, in __call__
+    return self.data_collator(features)
+  File "/home/shawn/anaconda3/envs/bliva/lib/python3.9/site-packages/transformers/data/data_collator.py", line 45, in __call__
+    return self.torch_call(features)
+  File "/home/shawn/anaconda3/envs/bliva/lib/python3.9/site-packages/transformers/data/data_collator.py", line 732, in torch_call
+    batch = self.tokenizer.pad(examples, return_tensors="pt", pad_to_multiple_of=self.pad_to_multiple_of)
+  File "/home/shawn/anaconda3/envs/bliva/lib/python3.9/site-packages/transformers/tokenization_utils_base.py", line 3074, in pad
+    return BatchEncoding(batch_outputs, tensor_type=return_tensors)
+  File "/home/shawn/anaconda3/envs/bliva/lib/python3.9/site-packages/transformers/tokenization_utils_base.py", line 211, in __init__
+    self.convert_to_tensors(tensor_type=tensor_type, prepend_batch_axis=prepend_batch_axis)
+  File "/home/shawn/anaconda3/envs/bliva/lib/python3.9/site-packages/transformers/tokenization_utils_base.py", line 747, in convert_to_tensors
+    raise ValueError(
+ValueError: Unable to create tensor, you should probably activate truncation and/or padding with 'padding=True' 'truncation=True' to have batched tensors with the same length. Perhaps your features (`input_ids` in this case) have excessive nesting (inputs type `list` where type `int` is expected).
+Traceback (most recent call last):
+  File "/home/shawn/anaconda3/envs/bliva/lib/python3.9/site-packages/transformers/tokenization_utils_base.py", line 731, in convert_to_tensors
+    tensor = as_tensor(value)
+TypeError: not a sequence
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/shawn/nvme/wli/Revisiting-Vicuna/trainer.py", line 93, in <module>
+  File "/home/shawn/nvme/wli/Revisiting-Vicuna/trainer.py", line 76, in train
+  File "/home/shawn/anaconda3/envs/bliva/lib/python3.9/site-packages/transformers/trainer.py", line 1539, in train
+    return inner_training_loop(
+  File "/home/shawn/anaconda3/envs/bliva/lib/python3.9/site-packages/transformers/trainer.py", line 1787, in _inner_training_loop
+    for step, inputs in enumerate(epoch_iterator):
+  File "/home/shawn/anaconda3/envs/bliva/lib/python3.9/site-packages/accelerate/data_loader.py", line 384, in __iter__
+    current_batch = next(dataloader_iter)
+  File "/home/shawn/anaconda3/envs/bliva/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 628, in __next__
+    data = self._next_data()
+  File "/home/shawn/anaconda3/envs/bliva/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 671, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "/home/shawn/anaconda3/envs/bliva/lib/python3.9/site-packages/torch/utils/data/_utils/fetch.py", line 61, in fetch
+    return self.collate_fn(data)
+  File "/home/shawn/anaconda3/envs/bliva/lib/python3.9/site-packages/transformers/trainer_utils.py", line 704, in __call__
+    return self.data_collator(features)
+  File "/home/shawn/anaconda3/envs/bliva/lib/python3.9/site-packages/transformers/data/data_collator.py", line 45, in __call__
+    return self.torch_call(features)
+  File "/home/shawn/anaconda3/envs/bliva/lib/python3.9/site-packages/transformers/data/data_collator.py", line 732, in torch_call
+    batch = self.tokenizer.pad(examples, return_tensors="pt", pad_to_multiple_of=self.pad_to_multiple_of)
+  File "/home/shawn/anaconda3/envs/bliva/lib/python3.9/site-packages/transformers/tokenization_utils_base.py", line 3074, in pad
+    return BatchEncoding(batch_outputs, tensor_type=return_tensors)
+  File "/home/shawn/anaconda3/envs/bliva/lib/python3.9/site-packages/transformers/tokenization_utils_base.py", line 211, in __init__
+    self.convert_to_tensors(tensor_type=tensor_type, prepend_batch_axis=prepend_batch_axis)
+  File "/home/shawn/anaconda3/envs/bliva/lib/python3.9/site-packages/transformers/tokenization_utils_base.py", line 747, in convert_to_tensors
+    raise ValueError(
+ValueError: Unable to create tensor, you should probably activate truncation and/or padding with 'padding=True' 'truncation=True' to have batched tensors with the same length. Perhaps your features (`input_ids` in this case) have excessive nesting (inputs type `list` where type `int` is expected).
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+wandb: - 0.014 MB of 0.014 MB uploaded (0.000 MB deduped)wandb: \ 0.014 MB of 0.014 MB uploaded (0.000 MB deduped)wandb: | 0.014 MB of 0.014 MB uploaded (0.000 MB deduped)wandb: / 0.014 MB of 0.014 MB uploaded (0.000 MB deduped)wandb: - 0.014 MB of 0.014 MB uploaded (0.000 MB deduped)wandb: \ 0.014 MB of 0.014 MB uploaded (0.000 MB deduped)wandb: 🚀 View run expert-valley-15 at: https://wandb.ai/wel019/huggingface/runs/djzlva78
+wandb: ️⚡ View job at https://wandb.ai/wel019/huggingface/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjExODEzMDMxNg==/version_details/v0
+wandb: Synced 6 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20231123_021538-djzlva78/logs
