@@ -19,8 +19,5 @@ For accessing the estimation scripts, please go to the folder [`estimations`](es
 ## Model training
 For training the model with given config stored in [`configs`](configs)
 ```bash
-# For default arguments
-python3 train.py
-# For more arguments
-python3 train.py --config_path <config file> --model_name <save model name> --model_dir <path to model> --batch_size <batch size> --epochs <numebr of epoches> --gpu_id <GPU ids to use>
+torchrun --nproc_per_node <number_of_gpu> --master_port=<port_number> train_vicuna.py --config <config_file_name>
 ```
