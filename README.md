@@ -19,5 +19,5 @@ For accessing the estimation scripts, please go to the folder [`estimations`](es
 ## Model training
 For training the model with given config stored in [`configs`](configs)
 ```bash
-torchrun --nproc_per_node <number_of_gpu> --master_port=<port_number> train_vicuna.py --config <config_file_name>
+torchrun --nproc_per_node <number_of_gpu> --master_port=<port_number> train_vicuna.py --config <config_file_name> --wandb_run_name <wandb run name>
 ```
