@@ -40,11 +40,12 @@ class SupervisedDataset(Dataset):
 # Argument Parser
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Training arguments for fine-tuning Llama model')
+    parser.add_argument('--wandb_run_name', type=str, default='my_run', help='Wandb run name')
     parser.add_argument('--config', type=str, default="config.json", help='Config file')
     parser.add_argument('--epochs', type=int, default=3, help='Number of training epochs')
     parser.add_argument('--learning_rate', type=float, default=2e-3, help='Learning rate')
-    parser.add_argument('--train_batch_size', type=int, default=32, help='Batch size for training')
-    parser.add_argument('--eval_batch_size', type=int, default=32, help='Batch size for evaluation')
+    parser.add_argument('--train_batch_size', type=int, default=16, help='Batch size for training')
+    parser.add_argument('--eval_batch_size', type=int, default=16, help='Batch size for evaluation')
     parser.add_argument('--save_steps', type=int, default=1200, help='Save steps')
     parser.add_argument('--version', type=int, default=1, help='Version for checkpoint directory')
     parser.add_argument('--warmup_ratio', type=float, default=0.03, help='Warmup ratio')
@@ -105,6 +106,8 @@ def main():
         fsdp_transformer_layer_cls_to_wrap='LlamaDecoderLayer',
         tf32=True,
         gradient_checkpointing=True,
+        report_to="wandb",
+        run_name=args.wandb_run_name
     )
 
     # Trainer
