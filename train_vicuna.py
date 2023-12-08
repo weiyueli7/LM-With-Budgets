@@ -7,6 +7,7 @@ from torch.utils.data import Dataset
 from transformers import AutoTokenizer, LlamaConfig, LlamaForCausalLM, Trainer, TrainingArguments
 
 # Constants
+os.environ["CUDA_VISIBLE_DEVICES"]="0,1,2,3,4,5,6,7"
 MAX_LENGTH = 1024
 
 # Function for Preprocessing
@@ -28,7 +29,7 @@ class SupervisedDataset(Dataset):
         if i in self.cached_data_dict:
             return self.cached_data_dict[i]
 
-        ret = preprocess(self.data[i], self.tokenizer)
+        ret = preprocess(self.data[i], self.tokenizerd)
         ret = {
             "input_ids": ret["input_ids"][0],
             "labels": ret["input_ids"][0],
@@ -41,11 +42,12 @@ class SupervisedDataset(Dataset):
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Training arguments for fine-tuning Llama model')
     parser.add_argument('--wandb_run_name', type=str, default='my_run', help='Wandb run name')
+    parser.add_argument('--data_pt', type=int, default=64, help='Number of Data Points for training')
     parser.add_argument('--config', type=str, default="config.json", help='Config file')
     parser.add_argument('--epochs', type=int, default=3, help='Number of training epochs')
-    parser.add_argument('--learning_rate', type=float, default=2e-3, help='Learning rate')
-    parser.add_argument('--train_batch_size', type=int, default=16, help='Batch size for training')
-    parser.add_argument('--eval_batch_size', type=int, default=16, help='Batch size for evaluation')
+    parser.add_argument('--learning_rate', type=float, default=8e-4, help='Learning rate')
+    parser.add_argument('--train_batch_size', type=int, default=64, help='Batch size for training')
+    parser.add_argument('--eval_batch_size', type=int, default=64, help='Batch size for evaluation')
     parser.add_argument('--save_steps', type=int, default=1200, help='Save steps')
     parser.add_argument('--version', type=int, default=1, help='Version for checkpoint directory')
     parser.add_argument('--warmup_ratio', type=float, default=0.03, help='Warmup ratio')
@@ -77,7 +79,7 @@ def main():
 
     # Tokenizer and Datasets
     tokenizer = AutoTokenizer.from_pretrained("lmsys/vicuna-7b-v1.5", use_fast=False)
-    train_data_loader = SupervisedDataset(train_raw_data, tokenizer)
+    train_data_loader = SupervisedDataset(train_raw_data[:args.data_pt], tokenizer)
     valid_data_loader = SupervisedDataset(valid_raw_data, tokenizer)
     test_data_loader = SupervisedDataset(test_raw_data, tokenizer)
 
