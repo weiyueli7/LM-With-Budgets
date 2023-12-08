@@ -20,7 +20,7 @@ def parse_arguments():
     parser.add_argument('--train_batch_size', type=int, default=64, help='Batch size for training')
     parser.add_argument('--eval_batch_size', type=int, default=64, help='Batch size for evaluation')
     parser.add_argument('--save_steps', type=int, default=1200, help='Save steps')
-    parser.add_argument('--version', type=int, default=1, help='Version for checkpoint directory')
+    parser.add_argument('--version', type=str, default="medium", help='Version for checkpoint directory: small, medium, large')
     parser.add_argument('--warmup_ratio', type=float, default=0.03, help='Warmup ratio')
     parser.add_argument('--weight_decay', type=float, default=0.0, help='Weight decay')
     parser.add_argument('--logging_steps', type=int, default=1, help='Logging steps')
