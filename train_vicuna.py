@@ -6,7 +6,7 @@ from tqdm import tqdm
 from torch.utils.data import Dataset
 from transformers import AutoTokenizer, LlamaConfig, LlamaForCausalLM, Trainer, TrainingArguments
 
-from data import
+from data import *
 
 # Constants
 os.environ["CUDA_VISIBLE_DEVICES"]="0,1,2,3,4,5,6,7"
