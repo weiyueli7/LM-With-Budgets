@@ -12,9 +12,18 @@ def generate_text(model, tokenizer, prompt, max_length):
     :param max_length: Maximum length of the generated text
     :return: Generated text
     """
-    input_ids = tokenizer.encode(prompt, return_tensors="pt")
-    output = model.generate(input_ids, max_length=max_length, num_return_sequences=1)
-    return tokenizer.decode(output[0], skip_special_tokens=True)
+    input_ids = tokenizer.encode(
+        prompt, return_tensors="pt"
+        )
+    output = model.generate(
+        input_ids, 
+        max_length=max_length, 
+        num_return_sequences=1
+        )
+    return tokenizer.decode(
+        output[0], 
+        skip_special_tokens=True
+        )
 
 def main():
     parser = argparse.ArgumentParser(description="Generate text using a pretrained language model.")
