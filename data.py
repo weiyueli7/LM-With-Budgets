@@ -5,37 +5,31 @@ import pandas as pd
 from torch.utils.data import Dataset
 
 
+# Function for Preprocessing
 def preprocess(RAW_DATA, TOKENIZER, MAX_LENGTH=1024):
-    dataset =  TOKENIZER(
-                           RAW_DATA,
-                           truncation=True,
-                           padding="max_length",
-                           max_length=MAX_LENGTH,
-                           return_tensors="pt",
-    )
-    return dataset
+    return TOKENIZER(RAW_DATA, truncation=True, padding="max_length", max_length=MAX_LENGTH, return_tensors="pt")
 
-
+# Custom Dataset Class
 class SupervisedDataset(Dataset):
-    """Dataset for supervised fine-tuning."""
-
-    def __init__(self, raw_data, tokenizer: transformers.PreTrainedTokenizer):
+    def __init__(self, raw_data, tokenizer):
         super(SupervisedDataset, self).__init__()
-
-        sources = [example for example in raw_data]
-        data_dict = preprocess(RAW_DATA=sources, TOKENIZER=tokenizer)
-
-        self.input_ids = data_dict["input_ids"]
-        self.labels = data_dict["input_ids"]
-        self.attention_mask = data_dict["attention_mask"]
+        self.tokenizer = tokenizer
+        self.data = raw_data
+        self.cached_data_dict = {}
 
     def __len__(self):
-        return len(self.input_ids)
+        return len(self.data)
 
     def __getitem__(self, i):
-        return dict(
-            input_ids=self.input_ids[i],
-            labels=self.input_ids[i],
-            attention_mask=self.attention_mask[i],
-        )
+        if i in self.cached_data_dict:
+            return self.cached_data_dict[i]
+
+        ret = preprocess(self.data[i], self.tokenizerd)
+        ret = {
+            "input_ids": ret["input_ids"][0],
+            "labels": ret["input_ids"][0],
+            "attention_mask": ret["attention_mask"][0],
+        }
+        self.cached_data_dict[i] = ret
+        return ret
         
