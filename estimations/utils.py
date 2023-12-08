@@ -1,4 +1,4 @@
-def estimate_parameters(s_vocab, n_ctx, n_layers, d_model, n_heads, d_head, hidden_ratio):
+def estimate_parameters(s_vocab, n_ctx, n_layers, d_model, n_heads, d_head, hidden_ratio=4):
     """
     Calculate the number of parameters (in Millions) in the GPT-3 models.
     Args:
@@ -9,7 +9,7 @@ def estimate_parameters(s_vocab, n_ctx, n_layers, d_model, n_heads, d_head, hidd
         d_model (int): Embedding size.
         n_heads (int): Number of heads.
         d_head (int): Size of each head.
-        hidden_ratio (float): Ratio of hidden size to embedding size.
+        hidden_ratio (float): Ratio of hidden size to embedding size. GPT-3 uses 4 and LLaMA uses 2.3
     Returns:
         float: Number of parameters (in Millions).
 
@@ -78,3 +78,6 @@ def estimate_backward_flops(s_vocab, n_ctx, n_layers, d_model, n_heads, d_head):
         n_layers * n_heads + d_model * n_ctx + \
             d_model * n_ctx * s_vocab
     return total
+
+def estimate_memory(s_vocab, n_ctx, n_layers, d_model, n_heads, d_head, hidden_ratio=4)
+    return 20 * estimate_parameters(s_vocab, n_ctx, n_layers, d_model, n_heads, d_head, hidden_ratio)
