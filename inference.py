@@ -4,6 +4,14 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from utils import *
 
 def generate_text(model, tokenizer, prompt, max_length):
+    """
+    Generate text using the pretrained model
+    :param model: Pretrained model
+    :param tokenizer: Tokenizer
+    :param prompt: Input prompt for the model
+    :param max_length: Maximum length of the generated text
+    :return: Generated text
+    """
     input_ids = tokenizer.encode(prompt, return_tensors="pt")
     output = model.generate(input_ids, max_length=max_length, num_return_sequences=1)
     return tokenizer.decode(output[0], skip_special_tokens=True)
