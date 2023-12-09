@@ -1,7 +1,9 @@
 import argparse
 from transformers import AutoModelForCausalLM, AutoTokenizer
+import sys
 
-from utils import *
+sys.path.append("..")
+from train.utils import *
 
 def generate_text(model, tokenizer, prompt, max_length):
     """
