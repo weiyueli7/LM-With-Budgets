@@ -14,6 +14,7 @@ def estimate_parameters(s_vocab, n_ctx, n_layers, d_model, n_heads, d_head, hidd
         float: Number of parameters (in Millions).
 
     """
+    # The usage of magic numbers are specified in the report
     word_embed = s_vocab * d_model
     pos_embed = n_ctx * d_model
     qkv = (3 * d_model * d_head) * n_heads * n_layers
@@ -41,6 +42,7 @@ def estimate_forward_flops(s_vocab, n_ctx, n_layers, d_model, n_heads, d_head):
         float: Number of forward FLOPs (in Millions).
 
     """
+    # The usage of magic numbers are specified in the report
     word_embed = 2 * n_ctx * s_vocab * d_model
     pos_embed = n_ctx * d_model
     qkv = 3 * 2 * n_ctx * d_model * d_head * n_heads * n_layers
@@ -68,8 +70,24 @@ def estimate_backward_flops(s_vocab, n_ctx, n_layers, d_model, n_heads, d_head):
         float: Number of backward FLOPs (in Millions).
 
     """
+    # The usage of 3 is specified in the report
     total = estimate_forward_flops(s_vocab, n_ctx, n_layers, d_model, n_heads, d_head) * 3
     return total
 
 def estimate_memory(s_vocab, n_ctx, n_layers, d_model, n_heads, d_head, hidden_ratio=4):
+    """
+    Calculate the memory (in GB) in the GPT-3 models.
+    Args:
+
+        s_vocab (int): Size of the vocabulary.
+        n_ctx (int): Context size.
+        n_layers (int): Number of layers.
+        d_model (int): Embedding size.
+        n_heads (int): Number of heads.
+        d_head (int): Size of each head.
+        hidden_ratio (float): Ratio of hidden size to embedding size. GPT-3 uses 4 and LLaMA uses 2.3
+    Returns:
+        float: Memory (in GB).
+    """
+    # The usage of 20 is specified in the report
     return 20 * estimate_parameters(s_vocab, n_ctx, n_layers, d_model, n_heads, d_head, hidden_ratio)
