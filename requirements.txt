@@ -14,17 +14,3 @@ jupyter
 ipywidgets
 zstandard
 fsspec
-# opendatasets
-# packaging
-# plotly
-# pre-commit
-# pycocoevalcap
-# pycocotools
-# python-magic
-# scikit-image
-# spacy
-# streamlit
-# timm==0.4.12
-# webdataset
-# wheel
-# peft

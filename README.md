@@ -15,8 +15,8 @@ Large Language Models (LLMs) have demonstrated impressive performance across var
 ## Setup
 To initialize the environment and packages:
 ```bash
-conda create -n model_training
-conda activate model_training
+conda create -n lm_budget python=3.9
+conda activate lm_budget
 pip install -r requirements.txt
 ```
 
