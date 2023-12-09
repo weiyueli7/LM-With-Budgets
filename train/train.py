@@ -4,8 +4,8 @@ import pandas as pd
 import json
 from tqdm import tqdm
 from transformers import AutoTokenizer, LlamaConfig, LlamaForCausalLM, Trainer, TrainingArguments
-
-from data import *
+import wandb
+from train.data import *
 
 
 # Argument Parser
@@ -39,6 +39,10 @@ def main():
     # Data loading
     os.environ["CUDA_VISIBLE_DEVICES"] = args.cuda_visible_devices
     MAX_LENGTH = args.max_length
+    
+    # Login Wandb
+    wandb.login(key="your_api_key_here")
+    wandb.login()
 
     # Data loading
     dir_path = args.data_dir_path
