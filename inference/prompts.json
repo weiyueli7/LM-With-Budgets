@@ -1,0 +1,29 @@
+[
+    {
+        "prompt": "What should we do for our quarter 2 project?",
+        "max_length": 45
+    },
+    {
+        "prompt": "What should we do for our quarter 2 project?",
+        "max_length": 150
+    },
+
+    {
+        "prompt": "Tell me something about orange juice.",
+        "max_length": 45
+    },
+
+    {
+        "prompt": "Tell me something about orange juice.",
+        "max_length": 150
+    },
+    {
+        "prompt": "Write a poem about birds.",
+        "max_length": 45
+    },
+    {
+        "prompt": "Write a poem about birds.",
+        "max_length": 150
+    }
+
+]

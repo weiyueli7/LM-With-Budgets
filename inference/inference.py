@@ -31,7 +31,7 @@ def main():
     parser = argparse.ArgumentParser(description="Generate text using a pretrained language model.")
     
     # Adding arguments
-    parser.add_argument("--model_dir", type=str, default="checkpoints_config2x/checkpoint-128400", help="Directory of the pretrained model")
+    parser.add_argument("--model_dir", type=str, default="TODO", help="Directory of the pretrained model")
     parser.add_argument("--prompt", type=str, default="What should we do for our quarter 2 project?", help="Input prompt for the model")
     parser.add_argument("--max_length", type=int, default=45, help="Maximum length of the generated text")
 
