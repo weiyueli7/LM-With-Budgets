@@ -68,16 +68,8 @@ def estimate_backward_flops(s_vocab, n_ctx, n_layers, d_model, n_heads, d_head):
         float: Number of backward FLOPs (in Millions).
 
     """
-    total = d_model * n_ctx + \
-        (n_ctx * d_model + n_ctx * d_model * d_model 
-         + d_model * n_ctx * d_head * n_heads) * \
-        n_layers + (n_ctx * d_head * n_heads + 
-                        n_ctx * n_ctx * d_model + 
-                        n_ctx * d_model + d_head 
-                        * n_ctx * d_model) * \
-        n_layers * n_heads + d_model * n_ctx + \
-            d_model * n_ctx * s_vocab
+    total = estimate_forward_flops(s_vocab, n_ctx, n_layers, d_model, n_heads, d_head) * 3
     return total
 
-def estimate_memory(s_vocab, n_ctx, n_layers, d_model, n_heads, d_head, hidden_ratio=4)
+def estimate_memory(s_vocab, n_ctx, n_layers, d_model, n_heads, d_head, hidden_ratio=4):
     return 20 * estimate_parameters(s_vocab, n_ctx, n_layers, d_model, n_heads, d_head, hidden_ratio)
