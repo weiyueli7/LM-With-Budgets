@@ -173,3 +173,6 @@ checkpoints_small/
 checkpoints_medium/
 
 checkpoints_large/
+
+
+train/SlimPajama-6B

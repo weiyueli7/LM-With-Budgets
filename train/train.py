@@ -5,7 +5,7 @@ import json
 from tqdm import tqdm
 from transformers import AutoTokenizer, LlamaConfig, LlamaForCausalLM, Trainer, TrainingArguments
 import wandb
-from train.data import *
+from data import *
 
 
 # Argument Parser
@@ -30,6 +30,7 @@ def parse_arguments():
     parser.add_argument('--lr_scheduler_type', type=str, default="cosine", choices=["linear", "cosine", "cosine_with_restarts", "polynomial", "constant", "constant_with_warmup"], help='Learning rate scheduler type')
     parser.add_argument('--cuda_visible_devices', type=str, default="0,1,2,3,4,5,6,7", help='CUDA visible devices')
     parser.add_argument('--max_length', type=int, default=1024, help='Maximum sequence length')
+    parser.add_argument('--wandb_api_key', type=str, default="5c95d990625662b8855c48431ae4d232ef3991e3", help='Wandb API Key')
     return parser.parse_args()
 
 # Main Function
@@ -41,7 +42,7 @@ def main():
     MAX_LENGTH = args.max_length
     
     # Login Wandb
-    wandb.login(key="your_api_key_here")
+    wandb.login(key=args.wandb_api_key)
     wandb.login()
 
     # Data loading

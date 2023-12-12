@@ -15,9 +15,10 @@ Large Language Models (LLMs) have demonstrated impressive performance across var
 ## Setup
 To initialize the environment and packages:
 ```bash
-conda create -n lm_budget python=3.9
+git clone https://github.com/weiyueli7/LM-With-Budgets.git
+cd LM-With-Budgets
+conda env create -f environment.yml
 conda activate lm_budget
-pip install -r requirements.txt
 ```
 
 ## Model Estimation
@@ -28,12 +29,10 @@ The [`estimation/data`](/estimations/data) directory contains the structures (pa
 
 ### Running the code
 We provide the code to calculate total trainable parameters for training and total FLOPs for forward and backward passes of the GPT-3 decoder-only model. To run the code for estimating parameters and FLOPs for all GPT-3 models included in `/estimations/data/parameters.csv` and `/estimations/data/flops.csv`:
+
 ```bash
 cd estimations
-python3 main.py -o [parameter/forward_flop/backward_flop/all]
-
-# Sample command for calculating total trainable parameters
-python3 main.py -o parameter
+python3 main.py -o all
 ```
 
 ## Model training
@@ -49,10 +48,9 @@ For training the model with given config stored in [`train/configs`](./train/con
 
 An example to train the model based on `train/configs/config.json` with 8 GPU and torchrun for parallel training:
 ```bash
-torchrun --master_port=5001 train_vicuna.py \
-    --nproc_per_node 8 \
+torchrun --nproc_per_node 8 --master_port=5001 train.py \
     --wandb_run_name "config" \
-    --data_dir_path "./SlimPajama-6B/" \
+    --data_dir_path "SlimPajama-6B/data" \
     --data_pt 566406 \
     --config "config.json" \
     --epochs 3 \
